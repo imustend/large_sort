@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <fstream>
+#include <string>
+#include <algorithm>
 
 namespace Sorting {
 	FILE* openFile(char* fileName, char* mode);
@@ -6,10 +9,17 @@ namespace Sorting {
 	
 	
 	class Chunk {
-		int position;
-		char* data;
+	public:
+		Chunk(int _poistion, int _size, int* data);
+		Chunk(int file);
+		~Chunk();
 		
-		void save_to_file(char* fileName);
+		
+		int position;
+		int size;
+		int* data;
+		
+		void save_to_file();
 		void sort();
 	};
 }
