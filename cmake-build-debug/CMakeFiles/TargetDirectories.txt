@@ -1,3 +1,0 @@
-/home/imustend/CLionProjects/bignsort/cmake-build-debug/CMakeFiles/bignsort.dir
-/home/imustend/CLionProjects/bignsort/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/imustend/CLionProjects/bignsort/cmake-build-debug/CMakeFiles/rebuild_cache.dir
