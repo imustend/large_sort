@@ -47,7 +47,7 @@ void Sorting::Chunk::save_to_file() const
 	o.close();
 }
 
-void Sorting::Chunk::load() const
+void Sorting::Chunk::load_file() const
 {
 	std::ifstream in(std::to_string(this->position) + ".temp");
 	
@@ -55,6 +55,10 @@ void Sorting::Chunk::load() const
 	{
 		in >> data[i];
 	}
+}
+
+void Sorting::Chunk::load(int *_data) {
+    this->data = _data;
 }
 
 void Sorting::Chunk::remove_data()

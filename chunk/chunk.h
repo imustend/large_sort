@@ -17,7 +17,8 @@ namespace Sorting {
 		int* data{};
 		
 		void save_to_file() const;
-		void load() const;
+		void load_file() const;
+        void load(int* _data);
 		void remove_data();
 		void sort() const;
         void remove_file() const;
