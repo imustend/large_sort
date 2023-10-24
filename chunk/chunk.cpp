@@ -1,10 +1,10 @@
 #include "chunk.h"
 
-Sorting::Chunk::Chunk(int _position, int _size, int* _data)
+Sorting::Chunk::Chunk(int _position, int _size)
 {
 	position = _position;
 	size = _size;
-	data = _data;
+	data = nullptr;
 }
 
 Sorting::Chunk::Chunk(int file_)
@@ -12,13 +12,8 @@ Sorting::Chunk::Chunk(int file_)
 	std::ifstream in(std::to_string(file_) + ".temp");
 	size = std::count(std::istreambuf_iterator<char>(in),
 					  std::istreambuf_iterator<char>(), '\n');
-	position = file_;
-	for (int i = 0; i < size; ++i)
-	{
-		in >> data[i];
-	}
-
-    std::cout << "loaded chunk from file: " << std::to_string(this->position) + ".temp" << "\n";
+	
+	data = nullptr;
 
     in.close();
 }
@@ -52,7 +47,23 @@ void Sorting::Chunk::save_to_file() const
 	o.close();
 }
 
-void Sorting::Chunk::remove() const
+void Sorting::Chunk::load() const
+{
+	std::ifstream in(std::to_string(this->position) + ".temp");
+	
+	for (int i = 0; i < this->size; ++i)
+	{
+		in >> data[i];
+	}
+}
+
+void Sorting::Chunk::remove_data()
+{
+	delete this->data;
+	this->data = nullptr;
+}
+
+void Sorting::Chunk::remove_file() const
 {
     try {
             if (std::filesystem::remove(std::to_string(this->position) + ".temp"))

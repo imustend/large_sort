@@ -7,7 +7,7 @@
 namespace Sorting {
     class Chunk {
 	public:
-		Chunk(int _position, int _size, int* data);
+		Chunk(int _position, int _size);
 		Chunk(int file);
 		~Chunk();
 		
@@ -17,8 +17,10 @@ namespace Sorting {
 		int* data{};
 		
 		void save_to_file() const;
+		void load() const;
+		void remove_data();
 		void sort() const;
-        void remove() const;
+        void remove_file() const;
 	};
 }
 
