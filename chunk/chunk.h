@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <filesystem>
+#include <vector>
 
 namespace Sorting {
     class Chunk {
@@ -13,14 +14,15 @@ namespace Sorting {
 		
 		
 		int position = 0;
-		long size = 0;
-		int* data{};
+        int size = 0;
+		std::vector<int> data{};
 		
 		void save_to_file() const;
-		void load_file() const;
-        void load(int* _data);
+		void load_file();
+        void load(std::vector<int> _data);
 		void remove_data();
-		void sort() const;
+		void sort();
+        void pushpack(int i);
         void remove_file() const;
 	};
 }

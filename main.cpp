@@ -1,8 +1,11 @@
 #include <iostream>
-#include "chunk/chunk.h"
+#include "sorter/sorter.h"
 
 int main(int argc, char* argv[])
 {
-	std::cout << "Hello, World!" << std::endl;
+    //TODO: better logging and arguments
+	auto sorter = new Sorting::Sorter("input.txt", "output.txt", 1000);
+    sorter->generate_and_sort_chunks();
+    sorter->delete_temp_files();
 	return 0;
 }
