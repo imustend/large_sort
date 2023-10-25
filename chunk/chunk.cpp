@@ -99,6 +99,7 @@ void Sorting::Chunk::load(std::vector<int> _data) {
 void Sorting::Chunk::remove_data()
 {
     this->data.clear();
+    std::destroy(this->data.begin(), this->data.end());
 }
 
 void Sorting::Chunk::remove_file() const

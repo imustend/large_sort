@@ -29,7 +29,7 @@ void Sorting::Sorter::generate_and_sort_chunks() {
 
         current_chunk++;
     }
-
+    this->number_of_chunks = current_chunk + 1;
 }
 
 void Sorting::Sorter::merge_sort() {
