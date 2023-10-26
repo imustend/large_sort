@@ -1,5 +1,16 @@
 #include "sorter.h"
 
+#define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+#define PBWIDTH 60
+
+void printProgress(double percentage) {
+    int val = (int) (percentage * 100) + 1;
+    int lpad = (int) (percentage * PBWIDTH);
+    int rpad = PBWIDTH - lpad;
+    printf("\r%3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
+    fflush(stdout);
+}
+
 void Sorting::Sorter::generate_and_sort_chunks() {
     unsigned int current_chunk = 0;
     int current_chunk_size;
@@ -14,11 +25,12 @@ void Sorting::Sorter::generate_and_sort_chunks() {
         while (this->size_of_chunks > current_chunk_size && in >> line) {
 			this->chunks[current_chunk].push_pack(line);
             current_chunk_size++;
-            line = 0;
+            this->size_of_everything++;
         }
         this->chunks[current_chunk].size = current_chunk_size;
 
         this->chunks[current_chunk].sort();
+
 
         std::cout << "created chunk: " << current_chunk << std::endl;
         this->chunks[current_chunk].save_to_file();
@@ -37,6 +49,7 @@ bool is_all_empty(const std::vector<std::ifstream*>& files) {
 	{
 		ret = ret and file->eof();
 	}
+    return ret;
 }
 
 void Sorting::Sorter::merge_sort() {
@@ -59,26 +72,26 @@ void Sorting::Sorter::merge_sort() {
 	}
 	int index = 0;
 
+    int sorting_progress = 0;
+
+
 	while (!is_all_empty(files)) {
-//		FIXME: this cuts off 14 last numbers and goes into endless loop of doing nothing
 		for (int i = 0; i < temp.size(); i++)
 		{
-			if (temp[i] < temp[index])
+			if ((temp[i] < temp[index] and !files[i]->eof()) or (files[index]->eof() and !files[i]->eof()))
 				index = i;
-		}
-		if (files[index]->eof()) {
-			continue;
 		}
 		out << temp[index] << std::endl;
 		int temp_num;
-		if (files[index]->eof()) {
-			continue;
-		}
 		*files[index] >> temp_num;
 		temp[index] = temp_num;
-		
-		std::cout << "sorting..." << std::endl;
+
+
+        printProgress((float)sorting_progress / (float)(this->size_of_everything));
+        sorting_progress++;
 	}
+
+    std::cout << std::endl;
 }
 
 Sorting::Sorter::Sorter(char *inputFileName, char *outputFileName, int sizeOfChunks) : input_file_name(

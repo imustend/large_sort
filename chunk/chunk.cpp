@@ -66,12 +66,9 @@ void Sorting::Chunk::save_to_file() const
 {
 	std::ofstream o(std::to_string(this->position) + ".temp");
 	
-	for (int i = 0; i < this->size; ++i)
+	for (auto i : this->data)
 	{
-		o << std::to_string(this->data[i]);
-        if (i != this->size-1) {
-            o << std::endl;
-        }
+		o << std::to_string(i) << '\n';
 	}
 
     std::cout << "saved chunk to file: " << std::to_string(this->position) + ".temp" << "\n";

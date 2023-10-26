@@ -13,6 +13,7 @@ namespace Sorting {
         char* output_file_name;
         int size_of_chunks;
         unsigned int number_of_chunks = 0;
+        int size_of_everything = 1;
         std::vector<Chunk> chunks;
 
         Sorter(char *inputFileName, char *outputFileName, int sizeOfChunks);
