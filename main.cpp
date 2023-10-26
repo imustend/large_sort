@@ -4,10 +4,10 @@
 
 int main(int argc, char* argv[])
 {
-	char* in = "input2.txt";
+	char* in = "input3.txt";
 	char* out = "output.txt";
-	int size = 1000000;
-    //TODO: better logging and arguments
+	int size = 10000;
+    //TODO: better logging
 	auto sorter = new Sorting::Sorter(in, out, size);
     sorter->generate_and_sort_chunks();
     sorter->merge_sort();

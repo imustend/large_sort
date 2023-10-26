@@ -71,7 +71,7 @@ void Sorting::Chunk::save_to_file() const
 		o << std::to_string(i) << '\n';
 	}
 
-    std::cout << "saved chunk to file: " << std::to_string(this->position) + ".temp" << "\n";
+
 	
 	o.close();
 }
@@ -91,7 +91,7 @@ void Sorting::Chunk::remove_file() const
 {
     try {
             if (std::filesystem::remove(std::to_string(this->position) + ".temp"))
-            std::cout << "file " << std::to_string(this->position) + ".temp" << " deleted.\n";
+            std::cout << "";
             else
             std::cout << "file " << std::to_string(this->position) + ".temp" << " not found.\n";
     }
