@@ -1,6 +1,7 @@
 #include "sorter.h"
 
 #define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+#define CLEAR "                                                                    "
 #define PBWIDTH 60
 #define GRN "\e[0;32m"
 #define CYN "\e[0;36m"
@@ -10,7 +11,7 @@ void printProgress(double percentage) {
     int val = (int) (percentage * 100) + 1;
     int lpad = (int) (percentage * PBWIDTH);
     int rpad = PBWIDTH - lpad;
-    printf(CYN "\r%3d%% [%.*s%*s]" NC, val, lpad, PBSTR, rpad, "");
+    printf("\r" CYN "%3d%% [%.*s%*s]" NC, val, lpad, PBSTR, rpad, "");
     fflush(stdout);
 }
 
@@ -27,6 +28,7 @@ void Sorting::Sorter::generate_and_sort_chunks() {
         this->chunks.emplace_back(current_chunk, this->size_of_chunks);
 
         while (this->size_of_chunks > current_chunk_size && in >> line) {
+            //FIXME: here if character is newline this shit crashes, gotta fix it
 			this->chunks[current_chunk].push_pack(line);
             current_chunk_size++;
             this->size_of_everything++;
@@ -39,13 +41,12 @@ void Sorting::Sorter::generate_and_sort_chunks() {
 
         this->chunks[current_chunk].remove_data();
 
-//        std::cout << "\rGenerated chunk number: " << current_chunk;
-        printf(CYN "\rGenerated chunk number: %d" NC, current_chunk);
+        printf("\r" CYN "Generated chunk number: %d" NC, current_chunk);
         std::cout.flush();
 
         current_chunk++;
     }
-    printf(GRN "\rDone!" NC);
+    printf(GRN "\rDone!" NC CLEAR);
     std::cout.flush();
     std::cout << "\n";
     this->number_of_chunks = current_chunk;
@@ -60,7 +61,7 @@ bool is_all_empty(const std::vector<std::ifstream*>& files) {
     return ret;
 }
 
-void Sorting::Sorter::merge_sort() {
+void Sorting::Sorter::merge_sort() const {
     std::ofstream out(this->output_file_name);
 	
 	std::vector<int> temp;
@@ -100,7 +101,7 @@ void Sorting::Sorter::merge_sort() {
         printProgress((float)sorting_progress / (float)(this->size_of_everything));
         sorting_progress++;
 	}
-    printf(GRN "\rDone!" NC);
+    printf(GRN "\rDone!" NC CLEAR);
     std::cout.flush();
     std::cout << "\n";
 }
@@ -116,7 +117,7 @@ void Sorting::Sorter::delete_temp_files() {
         printProgress((float)progress / (float)(this->number_of_chunks));
         progress++;
     }
-    printf(GRN "\rDone!" NC);
+    printf(GRN "\rDone!" NC CLEAR);
     std::cout.flush();
     std::cout << "\n";
 }

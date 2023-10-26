@@ -17,10 +17,9 @@ namespace Sorting {
         std::vector<Chunk> chunks;
 
         Sorter(char *inputFileName, char *outputFileName, int sizeOfChunks);
-        ~Sorter();
 
         void generate_and_sort_chunks();
-        void merge_sort();
+        void merge_sort() const;
         void delete_temp_files();
 
     };
