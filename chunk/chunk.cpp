@@ -79,18 +79,6 @@ void Sorting::Chunk::save_to_file() const
 	o.close();
 }
 
-void Sorting::Chunk::load_file()
-{
-	std::ifstream in(std::to_string(this->position) + ".temp");
-    this->size = std::count(std::istreambuf_iterator<char>(in),
-                      std::istreambuf_iterator<char>(), '\n');
-
-    unsigned long n;
-
-    while (in >> n) {
-        this->data.push_back(n);
-    }
-}
 
 void Sorting::Chunk::load(std::vector<int> _data) {
     this->data = std::move(_data);
@@ -120,6 +108,6 @@ Sorting::Chunk::~Chunk() {
     std::destroy(this->data.begin(), this->data.end());
 }
 
-void Sorting::Chunk::pushpack(int i) {
+void Sorting::Chunk::push_pack(int i) {
     this->data.push_back(i);
 }

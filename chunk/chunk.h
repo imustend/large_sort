@@ -22,8 +22,9 @@ namespace Sorting {
         void load(std::vector<int> _data);
 		void remove_data();
 		void sort();
-        void pushpack(int i);
+        void push_pack(int i);
         void remove_file() const;
+		int get_num();
 	};
 }
 
