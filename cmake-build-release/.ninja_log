@@ -1,5 +1,0 @@
-# ninja log v5
-0	1191	1698391681959721932	CMakeFiles/bignsort.dir/main.cpp.o	a045084f465375c2
-1	1201	1698391681967722096	CMakeFiles/bignsort.dir/chunk/chunk.cpp.o	9d849c9692118a75
-1	1360	1698391682127725366	CMakeFiles/bignsort.dir/sorter/sorter.cpp.o	16b878a98357d675
-1360	1453	1698391682219727246	bignsort	ee9a95bda53cab73
