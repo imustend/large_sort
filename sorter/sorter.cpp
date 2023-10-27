@@ -100,7 +100,7 @@ void Sorting::Sorter::merge_sort() const {
 
 		if((int)((float)sorting_progress / (float)(this->size_of_everything) * 100) != ckp) {
 			printProgress((float)sorting_progress / (float)(this->size_of_everything));
-			ckp = sorting_progress;
+			ckp = (int)((float)sorting_progress / (float)(this->size_of_everything) * 100);
 		}
   
 		sorting_progress++;
