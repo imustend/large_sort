@@ -69,7 +69,17 @@ void Sorting::Sorter::merge_sort() const {
 
     std::cout << "Merging chunks: \n";
 	
-	for (int i = 0; i < number_of_chunks; ++i)
+	if (this->chunks.size() == 1) {
+		std::ifstream in("0.temp");
+		int i;
+		while (in.eof()) {
+			in >> i;
+			out << i;
+		}
+		return;
+	}
+	
+	for (int i = 0; i < this->number_of_chunks; ++i)
 	{
 		auto *file = new std::ifstream(std::to_string(i) + ".temp");
 		files.push_back(file);
