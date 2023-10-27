@@ -1,0 +1,3 @@
+/home/imustend/CLionProjects/bignsort/cmake-build-minsizerel/CMakeFiles/bignsort.dir
+/home/imustend/CLionProjects/bignsort/cmake-build-minsizerel/CMakeFiles/edit_cache.dir
+/home/imustend/CLionProjects/bignsort/cmake-build-minsizerel/CMakeFiles/rebuild_cache.dir

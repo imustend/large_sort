@@ -27,8 +27,8 @@ void Sorting::Sorter::generate_and_sort_chunks() {
         current_chunk_size = 0;
         this->chunks.emplace_back(current_chunk, this->size_of_chunks);
 
-        while (this->size_of_chunks > current_chunk_size && in >> line) {
-            //FIXME: here if character is newline this shit crashes, gotta fix it
+        while (this->size_of_chunks > current_chunk_size && !in.eof()) {
+			in >> line;
 			this->chunks[current_chunk].push_pack(line);
             current_chunk_size++;
             this->size_of_everything++;
@@ -84,6 +84,7 @@ void Sorting::Sorter::merge_sort() const {
 	int index = 0;
 
     int sorting_progress = 0;
+	int ckp = -1;
 
 
 	while (!is_all_empty(files)) {
@@ -97,9 +98,12 @@ void Sorting::Sorter::merge_sort() const {
 		*files[index] >> temp_num;
 		temp[index] = temp_num;
 
-
-        printProgress((float)sorting_progress / (float)(this->size_of_everything));
-        sorting_progress++;
+		if((int)((float)sorting_progress / (float)(this->size_of_everything) * 100) != ckp) {
+			printProgress((float)sorting_progress / (float)(this->size_of_everything));
+			ckp = sorting_progress;
+		}
+  
+		sorting_progress++;
 	}
     printf(GRN "\rDone!" NC CLEAR);
     std::cout.flush();
