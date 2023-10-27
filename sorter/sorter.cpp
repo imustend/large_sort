@@ -8,7 +8,7 @@
 #define NC "\e[0m"
 
 void printProgress(double percentage) {
-    int val = (int) (percentage * 100) + 1;
+    int val = (int) (percentage * 100);
     int lpad = (int) (percentage * PBWIDTH);
     int rpad = PBWIDTH - lpad;
     printf("\r" CYN "%3d%% [%.*s%*s]" NC, val, lpad, PBSTR, rpad, "");
