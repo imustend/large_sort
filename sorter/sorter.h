@@ -2,6 +2,7 @@
 #include <fstream>
 #include <filesystem>
 #include <string>
+#include <optional>
 #include "../chunk/chunk.h"
 
 namespace Sorting {
