@@ -121,8 +121,6 @@ void Sorting::Sorter::merge_sort() const {
 		}
 		
 		if(all_eof) {
-			std::cout << temp[smallest_current] << std::endl;
-			
 			break;
 		}
 
