@@ -53,12 +53,12 @@ void Sorting::Sorter::generate_and_sort_chunks() {
 }
 
 bool is_all_empty(const std::vector<std::ifstream*>& files) {
-	bool ret = true;
-	for (auto file: files)
+	for (auto& file: files)
 	{
-		ret = ret and file->eof();
+		if (!file->eof())
+			return false;
 	}
-    return ret;
+	return true;
 }
 
 void Sorting::Sorter::merge_sort() const {
