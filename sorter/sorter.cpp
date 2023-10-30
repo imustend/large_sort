@@ -96,17 +96,33 @@ void Sorting::Sorter::merge_sort() const {
     int sorting_progress = 0;
 	int ckp = -1;
 
-
-	while (!is_all_empty(files)) {
-		for (int i = 0; i < temp.size(); i++)
-		{
-			if ((temp[i] < temp[index] and !files[i]->eof()) or (files[index]->eof() and !files[i]->eof()))
-				index = i;
+	int smallest_not_eof = 0;
+	while (true) {
+		int smallest_current = smallest_not_eof;
+		
+		for(int i = 1; i < files.size(); i++) {
+			if(temp[i] < temp[smallest_current] && !files[i]->eof()) {
+				smallest_current = i;
+			}
 		}
-		out << temp[index] << std::endl;
-		int temp_num;
-		*files[index] >> temp_num;
-		temp[index] = temp_num;
+		
+		out << temp[smallest_current] << '\n';
+		
+		*files[smallest_current] >> temp[smallest_current];
+		
+		bool all_eof = true;
+		
+		for(int i = 0; i < files.size(); i++) {
+			if(!files[i]->eof()) {
+				smallest_not_eof = i;
+				all_eof = false;
+				break;
+			}
+		}
+		
+		if(all_eof) {
+			break;
+		}
 
 		if((int)((float)sorting_progress / (float)(this->size_of_everything) * 100) != ckp) {
 			printProgress((float)sorting_progress / (float)(this->size_of_everything));
